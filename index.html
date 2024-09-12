@@ -1,1 +1,74 @@
 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #000;
+      }
+      .button {
+        height: 100px;
+        width: 400px;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        color: wheat;
+        transition: all 0.3s ease;
+      }
+      @property --angle {
+        syntax: "<angle>";
+        initial-value: 0deg;
+        inherits: false;
+      }
+      .button::after,
+      .button::before {
+        content: "";
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        padding: 4px;
+        background-image: conic-gradient(from var(--angle), #d000ff, #3232ff, #009a00, #d000ff);
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+      }
+      .button:hover:before {
+        filter: blur(1.5rem);
+        opacity: 0.5;
+      }
+      .button:hover::after,
+      .button:hover::before {
+        opacity: 0.5;
+        animation: spin 3s linear infinite;
+      }
+      @keyframes spin {
+        from {
+          --angle: 0deg;
+        }
+        to {
+          --angle: 360deg;
+        }
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="button">Hover Animation</div>
+  </body>
+</html>
